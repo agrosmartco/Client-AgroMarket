@@ -7,7 +7,7 @@ import { Login } from '../models/login';
 })
 export class LoginService {
 
-  API_URI = 'https://agroecommerce.azurewebsites.net/api'
+  API_URI = 'http://localhost:3000/users'
 
   constructor(private http: HttpClient) { }
 
