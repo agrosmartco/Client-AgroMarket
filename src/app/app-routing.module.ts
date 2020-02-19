@@ -11,7 +11,7 @@ import { FruitDerivatesComponent } from './components/sales/fruit-derivates/frui
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/sales/fruveg',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {

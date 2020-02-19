@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { Login } from '../../models/login';
 import { LoginService } from '../../services/login.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { User } from "../../models/user";
 
 
 
@@ -17,8 +19,14 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
+  user:User = {
+    firstName:'',
+    lastname:'',
+    email:'',
+    password:''
+  }
 
-  constructor(private loginservice: LoginService, private router: Router) { }
+  constructor(private loginservice: LoginService, private router: Router,private modalService: NgbModal) { }
 
 
 
@@ -27,7 +35,6 @@ export class LoginComponent implements OnInit {
   }
 
   sendCred() {
-
 
     this.loginservice.sendCredentials(this.credentials).subscribe(
       (res: any) => {
@@ -48,6 +55,39 @@ export class LoginComponent implements OnInit {
 
   }
 
+  createUsers(modal) {
+
+    console.log(this.user);
+    
+
+    this.loginservice.createUser(this.user).subscribe(
+      (res: any) => {
+
+        this.closeModal(modal);
+        window.alert('Usuario creado con exito')
+
+      },
+      err => {
+
+        console.error(err)
+
+      }
+    )
+
+  }
+
+  
+  showModal( modal) {
+
+ 
+    this.modalService.open(modal);
+
+  }
+
+  closeModal(modal){
+
+    this.modalService.dismissAll(modal);
+  }
 
 
 
