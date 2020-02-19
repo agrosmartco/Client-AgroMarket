@@ -87,7 +87,7 @@ export class FruvegComponent implements OnInit {
   showModal(producto: any, modal) {
 
     this.select.cantidad = 1,
-      this.select.descripcion = producto.descripcion;
+    this.select.descripcion = producto.descripcion;
     this.select.precio = producto.precio;
     this.select.imagen = producto.imagen;
     this.modalService.open(modal);
