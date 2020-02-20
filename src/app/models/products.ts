@@ -1,7 +1,16 @@
-export interface Products {
-    codigo?:number;
-    descripcion:string;
-    cantidad:number;
-    precio:number;
-    imagen?:string;
+export class Products {
+
+    constructor(
+
+        public id?: number,
+        public description?: string,
+        public price?: number,
+        public quantity?: number,
+        public image?: string,
+
+    ) {
+
     }
+
+
+}

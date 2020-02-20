@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
 import { Router } from '@angular/router';
+import { Products } from 'src/app/models/products';
 import { Selected } from 'src/app/models/selected';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as CryptoJS from 'crypto-js';
-
 
 @Component({
   selector: 'app-fruveg',
@@ -14,8 +13,8 @@ import * as CryptoJS from 'crypto-js';
 
 export class FruvegComponent implements OnInit {
 
-  //Init
-  products: any = [];
+  public products: Products[];
+
   searchTerm: string;
   conversionDecryptOutput: string;
   user: string;
@@ -46,33 +45,17 @@ export class FruvegComponent implements OnInit {
 
     this.getProducts();
 
-    if (localStorage.getItem('auth_token') !== null && localStorage.getItem('prf') !== null) {
+    const auth = localStorage.getItem('Token')
+
+    if (auth) {
       this.logon = true;
-    }
-
-    // Decrypt
-    this.conversionDecryptOutput = localStorage.getItem('prf')
-
-    if (this.conversionDecryptOutput) {
-
-      var bytes = CryptoJS.AES.decrypt(this.conversionDecryptOutput.toString(), 'dcripcoagroeco');
-
-      var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-
-      if (plaintext[1] == '1') {
-        this.user = 'Agricultor'
-      } else if (plaintext[1] == '2') {
-        this.user = 'Industrial'
-      } else if (plaintext[1] == '3') {
-        this.user = 'Persona'
-      }
     }
 
   }
 
   getProducts() {
 
-    this.productService.getFruveg().subscribe(
+    this.productService.getProducts().subscribe(
       res => {
 
         this.products = res;
@@ -86,10 +69,10 @@ export class FruvegComponent implements OnInit {
 
   showModal(producto: any, modal) {
 
-    this.select.cantidad = 1,
-    this.select.descripcion = producto.descripcion;
-    this.select.precio = producto.precio;
-    this.select.imagen = producto.imagen;
+    this.select.cantidad = 1;
+    this.select.descripcion = producto.description;
+    this.select.precio = producto.price;
+    this.select.imagen = producto.image;
     this.modalService.open(modal);
 
   }
@@ -140,7 +123,7 @@ export class FruvegComponent implements OnInit {
     }
 
     console.log(Ctotal);
-    console.log('$' + this.Ptotal);
+    console.log(this.Ptotal);
 
     console.log(this.listshow);
 
