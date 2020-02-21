@@ -1,17 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
 import { AppComponent } from './app.component';
-import { ProductsComponent } from './components/products/products.component';
+import { ProductsComponent } from './components/admin/products/products.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ProductsformComponent } from './components/productsform/productsform.component';
-import { NavigateComponent } from './components/navigate/navigate.component';
+import { ProductsformComponent } from './components/admin/products/productsform/productsform.component';
+import { NavigateComponent } from './components/admin/navigate/navigate.component';
 import { LoginComponent } from './components/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FruvegComponent } from './components/sales/fruveg/fruveg.component';
@@ -19,6 +19,9 @@ import { FruitDerivatesComponent } from './components/sales/fruit-derivates/frui
 import { SalesComponent } from './components/sales/sales/sales.component';
 import { NavegationComponent } from './components/sales/navegation/navegation.component';
 import { ProductFilterPipe } from './components/sales/productFilter.pipe';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+
 
 
 
@@ -47,7 +50,12 @@ import { ProductFilterPipe } from './components/sales/productFilter.pipe';
 
 
   ],
-  providers: [],
+  providers: [AuthGuard,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

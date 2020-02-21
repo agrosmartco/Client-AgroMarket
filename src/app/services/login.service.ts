@@ -25,4 +25,15 @@ export class LoginService {
 
   }
 
+  loggeedIn(): boolean{
+    if(localStorage.getItem('Token')){
+      return true;
+    }
+  }
+
+  tokenAuth(){
+    return localStorage.getItem('Token');
+  }
+
+
 }

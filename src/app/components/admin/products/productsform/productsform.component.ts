@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Products } from '../../models/products';
-import { ProductsService } from '../../services/products.service'
+import { Products } from '../../../../models/products';
+import { ProductsService } from '../../../../services/products.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
 
