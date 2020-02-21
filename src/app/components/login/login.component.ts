@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
         localStorage.setItem('Token', res.token);
 
-        this.router.navigate(['/sales/fruveg']);
+        this.router.navigate(['/sales/products']);
 
       },
       err => {

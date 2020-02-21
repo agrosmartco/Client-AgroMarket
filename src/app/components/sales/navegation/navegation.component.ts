@@ -37,15 +37,15 @@ var plaintext = bytes.toString(CryptoJS.enc.Utf8);
 }
 
   logout() {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('prf');
+
+    localStorage.removeItem('Token');
     localStorage.removeItem('allEntries');
     localStorage.removeItem('entry');
   }
 
 
   logIn(): boolean {
-    return (localStorage.getItem('auth_token') !== null);
+    return (localStorage.getItem('Token') !== null);
   }
 
 

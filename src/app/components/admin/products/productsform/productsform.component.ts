@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Products } from '../../models/products';
-import { ProductsService } from '../../services/products.service'
+import { Products } from '../../../../models/products';
+import { ProductsService } from '../../../../services/products.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
 
@@ -11,19 +11,15 @@ import * as CryptoJS from 'crypto-js';
 })
 export class ProductsformComponent implements OnInit {
 
-  products: any = [];
+  product: Products ={
+    description:'',
+    price:0,
+    quantity:0,
+    image:''
+  };
+
   edit: boolean = false;
   conversionDecryptOutput: string;
-
-  product: Products = {
-
-    codigo: 0,
-    descripcion: '',
-    cantidad: null,
-    precio: null,
-    imagen: '',
-
-  };
 
   constructor(private productService: ProductsService, private router: Router, private activateRout: ActivatedRoute) { }
 
@@ -36,9 +32,8 @@ export class ProductsformComponent implements OnInit {
         .subscribe(
           res => {
 
-            this.products = res[0];
+            this.product = res;
 
-            this.product = this.products;
 
             this.edit = true;
 
@@ -52,6 +47,8 @@ export class ProductsformComponent implements OnInit {
 
   saveNewProduct() {
 
+    console.log('aqui en save');
+
     console.log(this.product);
 
     this.productService.saveProduct(this.product)
@@ -60,7 +57,7 @@ export class ProductsformComponent implements OnInit {
         res => {
           console.log(res);
 
-          this.router.navigate(['/']);
+          this.router.navigate(['/products']);
 
         },
         err => console.log(err)
@@ -70,10 +67,9 @@ export class ProductsformComponent implements OnInit {
 
   }
 
-  updateProduct() {
+  updateProduct() {    
 
-
-    this.productService.updateProduct(this.product.codigo, this.product)
+    this.productService.updateProduct(this.product.id, this.product)
       .subscribe(
         res => {
           console.log(res);

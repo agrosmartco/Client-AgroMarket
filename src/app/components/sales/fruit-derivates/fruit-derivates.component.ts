@@ -15,15 +15,7 @@ export class FruitDerivatesComponent implements OnInit {
   products: any = [];
   searchTerm:string;
   
-  product: Products = {
-
-    codigo: 0,
-    descripcion: '',
-    cantidad: 0,
-    precio: 0,
-    imagen: '',
-
-  };
+  product: Products [];
 
   select: Selected = {
 
